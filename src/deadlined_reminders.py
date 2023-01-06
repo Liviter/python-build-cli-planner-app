@@ -9,19 +9,11 @@ class DeadlinedMetaReminder(Iterable, ABCMeta):
     def is_due(self):
         pass
 
-    def __iter__(self):
-        pass
-
 
 class DeadlinedReminder(ABC, Iterable):
     @abstractmethod
     def is_due(self):
         pass
-
-    def __iter__(self):
-        text = self.text
-        formatted_date = self.date.isoformat()
-        iter([text, formatted_date])
 
 
 class DateReminder(DeadlinedReminder):
@@ -31,3 +23,6 @@ class DateReminder(DeadlinedReminder):
 
     def is_due(self):
         return self.date <= datetime.now()
+
+    def __iter__(self):
+        return iter([self.text, self.date.isoformat()])
