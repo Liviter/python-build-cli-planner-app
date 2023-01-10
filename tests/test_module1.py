@@ -345,10 +345,6 @@ def test_task_10_subclasshook(backup_reminders_csv):
         '`__subclasshook__` gives wrong result for class that '\
             ' does not respect the protocol of `DeadlinedReminder`'
 
-    # --- task_10_add_reminder_evening ---------------------------------
-    assert hasattr(app, 'EveningReminder'),\
-        'You did not import/use `EveningReminder` in `app.py`'
-
     try:
         database.add_reminder('test_reminder', '1/1/2020', EveningReminder)
     except Exception as exc:

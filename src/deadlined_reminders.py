@@ -1,7 +1,7 @@
 from abc import ABCMeta, abstractmethod, ABC
-from _collections_abc import Iterable
 from dateutil.parser import parse
 from datetime import datetime
+from collections.abc import Iterable
 
 
 class DeadlinedMetaReminder(Iterable, ABCMeta):
@@ -21,12 +21,12 @@ class DeadlinedReminder(ABC, Iterable):
             return NotImplemented
 
         def attr_in_hierarchy(attr):
-            return any (attr in SuperClass.__dict__ for SuperClass in  subclass.__mro__)
+            return any (attr in SuperClass.__dict__ for SuperClass in subclass.__mro__)
 
         if not all(attr_in_hierarchy(attr) for attr in ('__iter__', 'is_due')):
             return NotImplemented
-
         return True
+
 
 class DateReminder(DeadlinedReminder):
     def __init__(self, text, date):

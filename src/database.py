@@ -15,12 +15,17 @@ def list_reminders():
         print()
 
 
-def add_reminder(text, date, ReminderClass):
-    reminder = ReminderClass(text, date)
+def add_reminder(text, date, time, ReminderClass):
+    reminder = ReminderClass(text, date, time)
     if not isinstance(reminder, DeadlinedReminder):
         raise TypeError("Invalid Reminder Class")
-
 
     with open('reminders.csv', 'a+', newline='\n') as file:
         writer = csv.writer(file)
         writer.writerow(reminder)
+
+
+def delete_reminders():
+    f = open("reminders.csv", 'w')
+    f.truncate()
+    f.close()
